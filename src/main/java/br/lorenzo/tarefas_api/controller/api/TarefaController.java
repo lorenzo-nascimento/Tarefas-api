@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/tarefas")
@@ -45,6 +46,15 @@ public class TarefaController {
     @PutMapping("/{id}")
     public TarefaResponseDTO update(@PathVariable Long id, @Valid @RequestBody TarefaRequestDTO request) {
         return service.update(id, request);
+    }
+
+    @PatchMapping("/{id}/status")
+    public TarefaResponseDTO updateStatus(
+            @PathVariable Long id,
+            @RequestBody Map<String, String> request) {
+
+        String novoStatus = request.get("status");
+        return service.updateStatus(id, novoStatus);
     }
 
     @DeleteMapping("/{id}")

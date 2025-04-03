@@ -3,6 +3,7 @@ package br.lorenzo.tarefas_api.service;
 import br.lorenzo.tarefas_api.dto.request.TarefaRequestDTO;
 import br.lorenzo.tarefas_api.dto.response.TarefaResponseDTO;
 import br.lorenzo.tarefas_api.model.Tarefa;
+import br.lorenzo.tarefas_api.model.enums.StatusTarefa;
 import br.lorenzo.tarefas_api.repository.TarefaRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
@@ -59,6 +60,15 @@ public class TarefaService {
         Tarefa tarefaAtualizada = repository.save(tarefa);
 
         return modelMapper.map(tarefaAtualizada, TarefaResponseDTO.class);
+    }
+
+    @Transactional
+    public TarefaResponseDTO updateStatus(Long id, String status) {
+        Tarefa tarefa = repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Tarefa não encontrada"));
+
+        tarefa.setStatus(StatusTarefa.valueOf(status));
+        return modelMapper.map(repository.save(tarefa), TarefaResponseDTO.class);
     }
 
     @Transactional
