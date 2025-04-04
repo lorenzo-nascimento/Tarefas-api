@@ -17,16 +17,3 @@ Sistema de gerenciamento de tarefas pessoais com backend Java (Spring Boot) e fr
 1. Clone o repositório:
    ```bash
    git clone https://github.com/lorenzo-nascimento/Tarefas-api
-
-
-### Anotações
-1.  Certifique-se de ter o Maven instalado.
-2.  Adicione a versão do Oracle Driver no `pom.xml`:
-
-    ```xml
-    <dependency>
-        <groupId>com.oracle.database.jdbc</groupId>
-        <artifactId>ojdbc8</artifactId>
-        <version>21.5.0.0</version>
-    </dependency>
-    ```
